@@ -64,7 +64,9 @@ include_once '../../template/sidebar.php';
                                                     <hr class="mt-1 mb-1">
                                                     <b>Pangkat </b> : <?= $row['nm_pangkat'] ?>
                                                 </td>
-                                                <td align="center"><span class="btn btn-xs btn-success"><?= $row['nm_jabatan'] ?></span></td>
+                                                <td align="center">
+                                                    <span class="btn btn-xs btn-success"><?= $row['nm_jabatan'] ?></span>
+                                                </td>
                                                 <td align="center">
                                                     <?php $d = $con->query("SELECT * FROM jabatan WHERE id_jabatan = '$row[id_jabatan_lama]' ")->fetch_array(); ?>
                                                     <span class="btn btn-xs btn-warning"><?= $d['nm_jabatan'] ?></span>

@@ -5,20 +5,23 @@ $no = 1;
 
 if (isset($_POST['cetak'])) {
 
-    $id_kategori = $_POST['id_kategori'];
-    $cekid_kategori = isset($id_kategori);
-    if ($id_kategori == $cekid_kategori) {
-        $sql = mysqli_query($con, "SELECT * FROM ebook a JOIN kategori b ON a.id_kategori = b.id_kategori WHERE a.id_kategori = '$id_kategori' ORDER BY a.id_ebook DESC");
-        $dt = $con->query("SELECT * FROM kategori WHERE id_kategori = '$id_kategori'")->fetch_array();
-        $label = 'LAPORAN EBOOK <br> Kategori : ' . $dt['nm_kategori'];
+    $tgl1 = $_POST['tgl1'];
+    $cektgl1 = isset($tgl1);
+    $tgl2 = $_POST['tgl2'];
+    $cektgl2 = isset($tgl2);
+    if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2) {
+
+        $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan WHERE a.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY tanggal ASC");
+
+        $label = 'LAPORAN MUTASI JABATAN PERSONIL <br> Tanggal Mutasi : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
     } else {
-        $sql = mysqli_query($con, "SELECT * FROM ebook a JOIN kategori b ON a.id_kategori = b.id_kategori ORDER BY a.id_ebook DESC");
-        $label = 'LAPORAN EBOOK';
+        $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan ORDER BY tanggal DESC");
+        $label = 'LAPORAN MUTASI JABATAN PERSONIL';
     }
 }
 
 require_once '../../assets/vendor/autoload.php';
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'LEGAL-L']);
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [380, 215]]);
 ob_start();
 ?>
 
@@ -30,7 +33,7 @@ ob_start();
 <html>
 
 <head>
-    <title>Laporan Ebook</title>
+    <title>Laporan Mutasi Jabatan Personil</title>
 </head>
 
 <style>
@@ -67,14 +70,14 @@ ob_start();
             <div class="card-box table-responsive">
                 <table border="1" cellspacing="0" cellpadding="6" width="100%">
                     <thead>
-                        <tr bgcolor="#007BFF" align="center">
+                        <tr bgcolor="#20C997" align="center">
                             <th>No</th>
-                            <th>Judul</th>
-                            <th>Penulis</th>
-                            <th>Penerbit</th>
-                            <th>Tahun Terbit</th>
-                            <th>Kategori</th>
-                            <th>Tanggal Posting</th>
+                            <th>Nama</th>
+                            <th>NRP / NIP</th>
+                            <th>Pangkat</th>
+                            <th>Mutasi ke Jabatan</th>
+                            <th>Jabatan Sebelumnya</th>
+                            <th>Tanggal Mutasi</th>
                         </tr>
                     </thead>
 
@@ -82,12 +85,15 @@ ob_start();
                         <?php while ($data = mysqli_fetch_array($sql)) { ?>
                             <tr>
                                 <td align="center" width="5%"><?= $no++; ?></td>
-                                <td><?= $data['judul'] ?></td>
-                                <td><?= $data['penulis'] ?></td>
-                                <td><?= $data['penerbit'] ?></td>
-                                <td align="center"><?= $data['tahun'] ?></td>
-                                <td align="center"><?= $data['nm_kategori'] ?></td>
-                                <td align="center"><?= tgl($data['tgl_posting']) ?></td>
+                                <td><?= $data['nm_personil'] ?></td>
+                                <td align="center"><?= $data['nrp_nip'] ?></td>
+                                <td align="center"><?= $data['nm_pangkat'] ?></td>
+                                <td align="center"><?= $data['nm_jabatan'] ?></td>
+                                <td align="center">
+                                    <?php $d = $con->query("SELECT * FROM jabatan WHERE id_jabatan = '$data[id_jabatan_lama]' ")->fetch_array(); ?>
+                                    <?= $d['nm_jabatan'] ?>
+                                </td>
+                                <td align="center"><?= tgl($data['tanggal']) ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

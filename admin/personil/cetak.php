@@ -84,7 +84,7 @@ ob_start();
             <div class="card-box table-responsive">
                 <table border="1" cellspacing="0" cellpadding="6" width="100%">
                     <thead>
-                        <tr bgcolor="#007BFF" align="center">
+                        <tr bgcolor="#20C997" align="center">
                             <th>No</th>
                             <th>Data Personil</th>
                             <th>TTL</th>

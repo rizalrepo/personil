@@ -1,41 +1,3 @@
-<div class="modal fade" id="lap_ebook">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title">Laporan Data Ebook</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" target="_blank" action="<?= base_url('admin/ebook/cetak') ?>">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Berdasarkan Kategori Ebook</label>
-                                <select name="id_kategori" class="form-control select2" style="width: 100%;">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM kategori ORDER BY id_kategori ASC"); ?>
-                                    <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_kategori'] ?>"><?= $row['nm_kategori'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group float-right">
-                            <button type="submit" name="cetak" class="btn btn-info"><i class="fa fa-print"> </i> Cetak</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 <div class="modal fade" id="lap_personil">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -74,8 +36,8 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group float-right">
-                            <button type="submit" name="cetak" class="btn btn-info"><i class="fa fa-print"> </i> Cetak</button>
+                        <div class="form-group">
+                            <button type="submit" name="cetak" class="btn bg-teal btn-block"><i class="fa fa-print"> </i> Cetak</button>
                         </div>
                     </div>
                 </form>
@@ -86,46 +48,41 @@
     <!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="lap_gadik">
+<div class="modal fade" id="lap_cuti">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Laporan Data Gadik Mapel</h6>
+                <h6 class="modal-title">Laporan Data Cuti</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" target="_blank" action="<?= base_url('admin/gadik/cetak') ?>">
+                <form method="POST" target="_blank" action="<?= base_url('admin/cuti/cetak') ?>">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Berdasarkan Mata Pelajaran</label>
-                                <select name="id_mapel" class="form-control select2" style="width: 100%;">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM mapel ORDER BY id_mapel ASC"); ?>
-                                    <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_mapel'] ?>"><?= $row['kd_mapel'] . ' - ' .  $row['nm_mapel'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Berdasarkan Tahun Asuhan</label>
-                                <select name="id_asuhan" class="form-control select2" style="width: 100%;">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM asuhan ORDER BY id_asuhan ASC"); ?>
-                                    <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_asuhan'] ?>">Tahun <?= $row['tahun'] . ' ' . $row['gelombang'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                                <label>Berdasarkan Tanggal Surat Cuti</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Dari Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Sampai Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl2">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group float-right">
-                            <button type="submit" name="cetak" class="btn btn-info"><i class="fa fa-print"> </i> Cetak</button>
+                        <div class="form-group">
+                            <button type="submit" name="cetak" class="btn bg-teal btn-block"><i class="fa fa-print"> </i> Cetak</button>
                         </div>
                     </div>
                 </form>
@@ -136,46 +93,34 @@
     <!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="lap_jadwal">
+<div class="modal fade" id="lap_mutasi">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Laporan Data Jadwal Mengajar</h6>
+                <h6 class="modal-title">Laporan Data Mutasi</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" target="_blank" action="<?= base_url('admin/jadwal/cetak') ?>">
+                <form method="POST" target="_blank" action="<?= base_url('admin/mutasi/cetak') ?>">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Nama Gadik</label>
-                                <select name="id_gadik_mapel" class="form-control select2" style="width: 100%;">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM gadik_mapel a JOIN personil b ON a.id_personil = b.id_personil ORDER BY id_gadik_mapel ASC"); ?>
-                                    <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_gadik_mapel'] ?>"><?= $row['nm_personil'] . ' | NRP/NIP ' . $row['nrp_nip'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                                <label>Dari Tanggal</label>
+                                <input type="date" class="form-control" name="tgl1">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Berdasarkan Tahun Asuhan</label>
-                                <select name="id_asuhan" class="form-control select2" style="width: 100%;">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM asuhan ORDER BY id_asuhan ASC"); ?>
-                                    <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_asuhan'] ?>">Tahun <?= $row['tahun'] . ' ' . $row['gelombang'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
+                                <label>Sampai Tanggal</label>
+                                <input type="date" class="form-control" name="tgl2">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group float-right">
-                            <button type="submit" name="cetak" class="btn btn-info"><i class="fa fa-print"> </i> Cetak</button>
+                        <div class="form-group">
+                            <button type="submit" name="cetak" class="btn bg-teal btn-block"><i class="fa fa-print"></i> Cetak</button>
                         </div>
                     </div>
                 </form>
@@ -186,34 +131,98 @@
     <!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="lap_pengasuh">
+<div class="modal fade" id="lap_tugas">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Laporan Data Pengasuh</h6>
+                <h6 class="modal-title">Laporan Data Perintah Tugas</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" target="_blank" action="<?= base_url('admin/pengasuh/cetak') ?>">
+                <form method="POST" target="_blank" action="<?= base_url('admin/tugas/cetak') ?>">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Berdasarkan Tahun Asuhan</label>
-                                <select name="id_asuhan" class="form-control select2" style="width: 100%;">
+                                <label>Berdasarkan Tanggal Surat Perintah Tugas</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Dari Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Sampai Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" name="cetak" class="btn bg-teal btn-block"><i class="fa fa-print"> </i> Cetak</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="lap_kegiatan">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Laporan Data Kegiatan</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" target="_blank" action="<?= base_url('admin/kegiatan/cetak') ?>">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Berdasarkan Tanggal Mulai Kegiatan</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Dari Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><i>Sampai Tanggal</i></label>
+                                            <input type="date" class="form-control" name="tgl2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Berdasarkan Jenis Kegiatan</label>
+                                <select name="id_jenis_kegiatan" class="form-control select2" style="width: 100%;">
                                     <option value="">-- Pilih --</option>
-                                    <?php $data = $con->query("SELECT * FROM asuhan ORDER BY id_asuhan ASC"); ?>
+                                    <?php $data = $con->query("SELECT * FROM jenis_kegiatan ORDER BY id_jenis_kegiatan ASC"); ?>
                                     <?php foreach ($data as $row) : ?>
-                                        <option value="<?= $row['id_asuhan'] ?>">Tahun <?= $row['tahun'] . ' ' . $row['gelombang'] ?></option>
+                                        <option value="<?= $row['id_jenis_kegiatan'] ?>"><?= $row['nm_jenis_kegiatan'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group float-right">
-                            <button type="submit" name="cetak" class="btn btn-info"><i class="fa fa-print"> </i> Cetak</button>
+                        <div class="form-group">
+                            <button type="submit" name="cetak" class="btn bg-teal btn-block"><i class="fa fa-print"> </i> Cetak</button>
                         </div>
                     </div>
                 </form>

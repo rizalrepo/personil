@@ -9,24 +9,14 @@ if (isset($_POST['cetak'])) {
     $cektgl1 = isset($tgl1);
     $tgl2 = $_POST['tgl2'];
     $cektgl2 = isset($tgl2);
-    $id_jenis_kegiatan = $_POST['id_jenis_kegiatan'];
-    $cekid_jenis_kegiatan = isset($id_jenis_kegiatan);
-    if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_jenis_kegiatan == null) {
+    if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2) {
 
-        $sql = mysqli_query($con, "SELECT * FROM kegiatan a JOIN jenis_kegiatan b ON a.id_jenis_kegiatan = b.id_jenis_kegiatan WHERE a.tgl_mulai BETWEEN '$tgl1' AND '$tgl2' ORDER BY tgl_mulai ASC");
+        $sql = mysqli_query($con, "SELECT * FROM tugas WHERE tgl_surat BETWEEN '$tgl1' AND '$tgl2' ORDER BY tgl_surat ASC");
 
-        $label = 'LAPORAN KEGIATAN <br> Tanggal Mulai Kegiatan : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
-    } else if ($tgl1 == null && $tgl2 == null && $id_jenis_kegiatan == $cekid_jenis_kegiatan) {
-        $sql = mysqli_query($con, "SELECT * FROM kegiatan a JOIN jenis_kegiatan b ON a.id_jenis_kegiatan = b.id_jenis_kegiatan WHERE a.id_jenis_kegiatan = '$id_jenis_kegiatan' ORDER BY tgl_mulai DESC");
-        $dt = $con->query("SELECT * FROM jenis_kegiatan WHERE id_jenis_kegiatan = '$id_jenis_kegiatan'")->fetch_array();
-        $label = 'LAPORAN KEGIATAN <br> Jenis Kegiatan : ' . $dt['nm_jenis_kegiatan'];
-    } else if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_jenis_kegiatan == $cekid_jenis_kegiatan) {
-        $sql = mysqli_query($con, "SELECT * FROM kegiatan a JOIN jenis_kegiatan b ON a.id_jenis_kegiatan = b.id_jenis_kegiatan WHERE a.tgl_mulai BETWEEN '$tgl1' AND '$tgl2' AND a.id_jenis_kegiatan = '$id_jenis_kegiatan' ORDER BY tgl_mulai ASC");
-        $dt = $con->query("SELECT * FROM jenis_kegiatan WHERE id_jenis_kegiatan = '$id_jenis_kegiatan'")->fetch_array();
-        $label = 'LAPORAN KEGIATAN <br> Tanggal Mulai Kegiatan : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Jenis Kegiatan : ' . $dt['nm_jenis_kegiatan'];
+        $label = 'LAPORAN PERINTAH TUGAS <br> Tanggal dimulai : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
     } else {
-        $sql = mysqli_query($con, "SELECT * FROM kegiatan a JOIN jenis_kegiatan b ON a.id_jenis_kegiatan = b.id_jenis_kegiatan ORDER BY tgl_mulai DESC");
-        $label = 'LAPORAN KEGIATAN';
+        $sql = mysqli_query($con, "SELECT * FROM tugas ORDER BY tgl_surat DESC");
+        $label = 'LAPORAN PERINTAH TUGAS';
     }
 }
 
@@ -43,7 +33,7 @@ ob_start();
 <html>
 
 <head>
-    <title>Laporan Kegiatan</title>
+    <title>Laporan Perintah Tugas</title>
 </head>
 
 <style>
@@ -82,51 +72,46 @@ ob_start();
                     <thead>
                         <tr bgcolor="#20C997" align="center">
                             <th>No</th>
-                            <th>Nama Kegiatan</th>
-                            <th>Jenis Kegiatan</th>
+                            <th>Nomor Surat</th>
+                            <th>Tanggal Surat</th>
+                            <th>Agenda</th>
                             <th>Tanggal</th>
-                            <th>Lama Kegiatan</th>
-                            <th>Tempat</th>
-                            <th>Keterangan</th>
-                            <th>Status Kegiatan</th>
+                            <th>Lama Tugas</th>
+                            <th>Tempat/Lokasi</th>
+                            <th>Yang Bertugas</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <?php
-                        while ($data = mysqli_fetch_array($sql)) {
+                        <?php while ($data = mysqli_fetch_array($sql)) {
                             $tgl1 = $data['tgl_mulai'];
                             $tgl2 = date('Y-m-d', strtotime('-1 days', strtotime($tgl1)));
                             $a = date_create($tgl2);
                             $b = date_create($data['tgl_selesai']);
                             $diff = date_diff($a, $b);
-
-                            $mulai = date('Y-m-d', strtotime($data['tgl_mulai']));
-                            $selesai = date('Y-m-d', strtotime($data['tgl_selesai']));
-
-                            if ((date('Y-m-d') >= $mulai) && (date('Y-m-d') <= $selesai)) {
-                                $sts = 'Sedang Dilaksanakan';
-                            } else if (date('Y-m-d') < $mulai) {
-                                $sts = 'Belum Dilaksanakan';
-                            } else if (date('Y-m-d') > $selesai) {
-                                $sts = 'Telah Dilaksanakan';
-                            }
                         ?>
                             <tr>
                                 <td align="center" width="5%"><?= $no++; ?></td>
-                                <td><?= $data['nm_kegiatan'] ?></td>
-                                <td align="center"><?= $data['nm_jenis_kegiatan'] ?></td>
+                                <td align="center"><?= $data['no_surat'] ?></td>
+                                <td align="center"><?= tgl($data['tgl_surat']) ?></td>
+                                <td><?= $data['agenda'] ?></td>
                                 <td align="center">
-                                    <?php if ($data['tgl_mulai'] == $data['tgl_selesai']) { ?>
-                                        <?= tgl($data['tgl_mulai']) ?>
-                                    <?php } else { ?>
-                                        <?= tgl($data['tgl_mulai']) . ' s/d ' . tgl($data['tgl_selesai']) ?>
-                                    <?php } ?>
+                                    <?php if ($data['tgl_mulai'] == $data['tgl_selesai']) {
+                                        echo tgl($data['tgl_mulai']);
+                                    } else {
+                                        echo tgl($data['tgl_mulai']) . ' s/d ' . tgl($data['tgl_selesai']);
+                                    } ?>
                                 </td>
                                 <td align="center"><?= $diff->d . ' Hari' ?></td>
                                 <td align="center"><?= $data['tempat'] ?></td>
-                                <td><?= $data['ket'] ?></td>
-                                <td align="center"><?= $sts ?></td>
+                                <td>
+                                    <?php
+                                    $d = $con->query("SELECT * FROM tugas_detail td JOIN personil p ON p.id_personil = td.id_personil WHERE td.id_tugas = '$data[id_tugas]' ");
+                                    while ($row = $d->fetch_array()) {
+                                        echo ' - ' . $row['nm_personil'] . '| NRP/NIK ' . $row['nrp_nip'] . '<br>';
+                                    }
+                                    ?>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>

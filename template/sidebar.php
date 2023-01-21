@@ -146,28 +146,28 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_ebook">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Ebook</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_personil">
                                     <p><i class="fa fa-file-alt mr-1"></i> Personil</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_gadik">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Gadik Mapel</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_cuti">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Cuti</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_jadwal">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Jadwal Mengajar</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_mutasi">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Mutasi Jabatan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_pengasuh">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Pengasuh</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_tugas">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Perintah Tugas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_kegiatan">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Kegiatan</p>
                                 </a>
                             </li>
                         </ul>
@@ -195,28 +195,28 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#ebook">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Ebook</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_personil">
                                     <p><i class="fa fa-file-alt mr-1"></i> Personil</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_gadik">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Gadik Mapel</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_cuti">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Cuti</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_jadwal">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Jadwal Mengajar</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_mutasi">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Mutasi Jabatan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_pengasuh">
-                                    <p><i class="fa fa-file-alt mr-1"></i> Pengasuh</p>
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_tugas">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Perintah Tugas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-toggle="modal" data-target="#lap_kegiatan">
+                                    <p><i class="fa fa-file-alt mr-1"></i> Kegiatan</p>
                                 </a>
                             </li>
                         </ul>
