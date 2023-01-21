@@ -55,6 +55,12 @@ $no_surat = $a . '/' . $b . '/' . $c[date('n')] . '/' . $d;
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tanggal Surat</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" name="tgl_surat" value="<?= date('Y-m-d') ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Personil</label>
                                     <div class="col-sm-10 input-group">
                                         <input type="text" class="form-control" hidden name="id_personil" id="id_personil" required>
@@ -195,6 +201,7 @@ include_once '../../template/footer.php';
 <?php
 if (isset($_POST['submit'])) {
     $no_surat = $_POST['no_surat'];
+    $tgl_surat = $_POST['tgl_surat'];
     $id_personil = $_POST['id_personil'];
     $ket = $_POST['ket'];
     $tgl_mulai = $_POST['tgl_mulai'];
@@ -203,6 +210,7 @@ if (isset($_POST['submit'])) {
     $tambah = $con->query("INSERT INTO cuti VALUES (
         default, 
         '$no_surat', 
+        '$tgl_surat', 
         '$id_personil', 
         '$ket',
         '$tgl_mulai',

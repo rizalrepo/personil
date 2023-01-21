@@ -53,7 +53,7 @@ ob_start();
             <td>&nbsp;<br></td>
         </tr>
         <tr>
-            <td style="text-align: right;">Banjarbaru, <?= tgl(date('Y-m-d')); ?></td>
+            <td style="text-align: right;">Banjarbaru, <?= tgl($row['tgl_surat']); ?></td>
         </tr>
         <tr>
             <td>&nbsp;<br></td>
@@ -133,7 +133,12 @@ ob_start();
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td align="justify">Bermaksud untuk mengajukan Cuti dengan keterangan <b><?= $row['ket'] ?></b> selama <?= $diff->d; ?> Hari, terhitung mulai tanggal <?= tgl($row['tgl_mulai']) ?> sampai dengan tanggal <?= tgl($row['tgl_selesai']) ?><br>
+            <td align="justify">Bermaksud untuk mengajukan Cuti dengan keterangan <b><?= $row['ket'] ?></b> selama <?= $diff->d; ?> Hari,
+                <?php if ($row['tgl_mulai'] == $row['tgl_selesai']) { ?>
+                    pada tanggal <?= tgl($row['tgl_mulai']) ?> <br>
+                <?php } else { ?>
+                    terhitung mulai tanggal <?= tgl($row['tgl_mulai']) ?> sampai dengan tanggal <?= tgl($row['tgl_selesai']) ?><br>
+                <?php } ?>
             </td>
         </tr>
         <tr>
