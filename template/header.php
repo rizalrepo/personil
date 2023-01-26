@@ -14,7 +14,7 @@ if (!isset($_SESSION['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>E-Library SPN POLDA KALSEL</title>
+    <title>Pengelolaan Personil SPN POLDA KALSEL</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url() ?>/assets/images/logo.png">
 
