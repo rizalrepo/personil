@@ -257,7 +257,9 @@ if (isset($_POST['submit'])) {
             '$id_jabatan',
             '$id_jabatan_lama',
             '$tanggal',
-            '$file_sk'
+            '$file_sk',
+            1,
+            default
         )");
 
         if ($tambah) {

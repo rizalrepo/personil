@@ -1,3 +1,12 @@
+<?php
+$vf = [
+    '' => '-- Pilih --',
+    '1' => 'Menunggu',
+    '2' => 'Disetujui',
+    '3' => 'Ditolak',
+];
+?>
+
 <div class="modal fade" id="lap_personil">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -79,6 +88,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Berdasarkan Status Verifikasi</label>
+                                <?= form_dropdown('verif', $vf, '', 'class="form-control"') ?>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -115,6 +130,12 @@
                             <div class="form-group">
                                 <label>Sampai Tanggal</label>
                                 <input type="date" class="form-control" name="tgl2">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Berdasarkan Status Verifikasi</label>
+                                <?= form_dropdown('verif', $vf, '', 'class="form-control"') ?>
                             </div>
                         </div>
                     </div>

@@ -45,6 +45,7 @@ include_once '../../template/sidebar.php';
                                             <th>Data Personil</th>
                                             <th>Keterangan</th>
                                             <th>Tanggal</th>
+                                            <th>Verifikasi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -88,10 +89,26 @@ include_once '../../template/sidebar.php';
                                                         Lama Cuti : ' . $diff->d . ' Hari';
                                                     } ?>
                                                 </td>
+                                                <td align="center">
+                                                    <?php if ($row['verif'] == 1) { ?>
+                                                        <span class="btn btn-xs btn-warning">Menunggu</span>
+                                                    <?php } else if ($row['verif'] == 2) { ?>
+                                                        <span class="btn btn-xs btn-success">Disetujui</span>
+                                                    <?php } else { ?>
+                                                        <span class="btn btn-xs btn-danger">Ditolak</span><br>
+                                                        <?= $row['verif_ket'] ?>
+                                                    <?php }  ?>
+                                                </td>
                                                 <td align="center" width="12%">
-                                                    <a href="surat?id=<?= $row[0] ?>" target="_blank" class="btn bg-olive btn-xs" title="Surat"><i class="fas fa-envelope-open-text"></i></a>
-                                                    <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    <?php if ($row['verif'] == 1) { ?>
+                                                        <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
+                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    <?php } else if ($row['verif'] == 2) { ?>
+                                                        <a href="surat?id=<?= $row[0] ?>" target="_blank" class="btn bg-olive btn-xs" title="Surat"><i class="fas fa-envelope-open-text"></i></a>
+                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    <?php } else { ?>
+                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    <?php }  ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>

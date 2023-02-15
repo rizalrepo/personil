@@ -184,6 +184,28 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="<?= base_url() ?>/admin/verif-cuti/" class="nav-link <?php if ($page == 'cuti') {
+                                                                                            echo 'active';
+                                                                                        } ?>">
+                            <i class="nav-icon fas fa-calendar-times"></i>
+                            <p>
+                                Data Cuti
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url() ?>/admin/verif-mutasi/" class="nav-link <?php if ($page == 'mutasi') {
+                                                                                            echo 'active';
+                                                                                        } ?>">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>
+                                Data Mutasi Jabatan
+                            </p>
+                        </a>
+                    </li>
+
                     <li class="nav-header">Laporan</li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">

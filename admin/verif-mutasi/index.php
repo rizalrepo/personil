@@ -15,7 +15,6 @@ include_once '../../template/sidebar.php';
                     <h4 class="m-0 text-dark"><i class="fas fa-id-card-alt ml-1 mr-1"></i> Data Mutasi Jabatan</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 text-right">
-                    <a href="tambah" class="btn btn-sm bg-dark"><i class="fa fa-plus-circle"> Tambah Data</i></a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -85,16 +84,12 @@ include_once '../../template/sidebar.php';
                                                 </td>
                                                 <td align="center" width="12%">
                                                     <?php if ($row['verif'] == 1) { ?>
-                                                        <a href="<?= base_url('file/mutasi/' . $row['file_sk']) ?>" target="_blank" class="btn bg-olive btn-xs" title="File SK"><i class="fas fa-file-pdf"></i></a>
-                                                        <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
-                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                        <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i> Verifikasi</a>
                                                     <?php } else if ($row['verif'] == 2) { ?>
                                                         <a href="<?= base_url('file/mutasi/' . $row['file_sk']) ?>" target="_blank" class="btn bg-olive btn-xs" title="File SK"><i class="fas fa-file-pdf"></i></a>
-                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
                                                     <?php } else { ?>
-                                                        <a href="<?= base_url('file/mutasi/' . $row['file_sk']) ?>" target="_blank" class="btn bg-olive btn-xs" title="File SK"><i class="fas fa-file-pdf"></i></a>
-                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
-                                                    <?php } ?>
+                                                        #
+                                                    <?php }  ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>

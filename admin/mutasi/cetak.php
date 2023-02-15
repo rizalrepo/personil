@@ -9,11 +9,29 @@ if (isset($_POST['cetak'])) {
     $cektgl1 = isset($tgl1);
     $tgl2 = $_POST['tgl2'];
     $cektgl2 = isset($tgl2);
-    if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2) {
+
+    $verif = $_POST['verif'];
+    $cekverif = isset($verif);
+
+    if ($verif == 1) {
+        $sub = 'Menunggu';
+    } else if ($verif == 2) {
+        $sub = 'Disetujui';
+    } else {
+        $sub = 'Ditolak';
+    }
+
+    if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $verif == null) {
 
         $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan WHERE a.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY tanggal ASC");
 
         $label = 'LAPORAN MUTASI JABATAN PERSONIL <br> Tanggal Mutasi : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
+    } else if ($tgl1 == null && $tgl2 == null && $verif == $cekverif) {
+        $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan WHERE a.verif = $verif ORDER BY tanggal DESC");
+        $label = 'LAPORAN MUTASI JABATAN PERSONIL <br> Status Verifikasi : ' . $sub;
+    } else if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $verif == $cekverif) {
+        $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan WHERE a.tanggal BETWEEN '$tgl1' AND '$tgl2' AND a.verif = $verif ORDER BY tanggal ASC");
+        $label = 'LAPORAN MUTASI JABATAN PERSONIL <br> Tanggal Mutasi : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Status Verifikasi : ' . $sub;
     } else {
         $sql = mysqli_query($con, "SELECT * FROM mutasi a JOIN personil b ON a.id_personil = b.id_personil JOIN pangkat c ON b.id_pangkat = c.id_pangkat JOIN jabatan d ON b.id_jabatan = d.id_jabatan ORDER BY tanggal DESC");
         $label = 'LAPORAN MUTASI JABATAN PERSONIL';
@@ -78,6 +96,7 @@ ob_start();
                             <th>Mutasi ke Jabatan</th>
                             <th>Jabatan Sebelumnya</th>
                             <th>Tanggal Mutasi</th>
+                            <th>Verifikasi</th>
                         </tr>
                     </thead>
 
@@ -94,6 +113,16 @@ ob_start();
                                     <?= $d['nm_jabatan'] ?>
                                 </td>
                                 <td align="center"><?= tgl($data['tanggal']) ?></td>
+                                <td align="center">
+                                    <?php if ($data['verif'] == 1) { ?>
+                                        Menunggu
+                                    <?php } else if ($data['verif'] == 2) { ?>
+                                        Disetujui
+                                    <?php } else { ?>
+                                        Ditolak<br>
+                                        <?= $data['verif_ket'] ?>
+                                    <?php }  ?>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>

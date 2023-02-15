@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2023 at 04:42 AM
+-- Generation Time: Feb 15, 2023 at 03:17 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -35,15 +35,17 @@ CREATE TABLE `cuti` (
   `id_personil` int(11) NOT NULL,
   `ket` text NOT NULL,
   `tgl_mulai` date NOT NULL,
-  `tgl_selesai` date NOT NULL
+  `tgl_selesai` date NOT NULL,
+  `verif` char(1) NOT NULL,
+  `verif_ket` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cuti`
 --
 
-INSERT INTO `cuti` (`id_cuti`, `no_surat`, `tgl_surat`, `id_personil`, `ket`, `tgl_mulai`, `tgl_selesai`) VALUES
-(3, '01/CUTI/I/2023', '2023-01-19', 2, 'test ket2', '2023-01-25', '2023-01-25');
+INSERT INTO `cuti` (`id_cuti`, `no_surat`, `tgl_surat`, `id_personil`, `ket`, `tgl_mulai`, `tgl_selesai`, `verif`, `verif_ket`) VALUES
+(4, '01/CUTI/II/2023', '2023-02-15', 2, 'test ket', '2023-02-15', '2023-02-17', '2', '');
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,8 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id_kegiatan`, `nm_kegiatan`, `id_jenis_kegiatan`, `tgl_mulai`, `tgl_selesai`, `tempat`, `ket`) VALUES
-(1, 'Test Kegiatan', 3, '2023-01-20', '2023-01-21', 'Test Tempat', 'test ket');
+(1, 'Test Kegiatan', 3, '2023-01-20', '2023-01-21', 'Test Tempat', 'test ket'),
+(2, 'Test Kegiatan2', 1, '2023-01-23', '2023-01-25', 'Test Tempat', 'cuti tahunan');
 
 -- --------------------------------------------------------
 
@@ -118,15 +121,17 @@ CREATE TABLE `mutasi` (
   `id_jabatan` int(11) NOT NULL,
   `id_jabatan_lama` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `file_sk` varchar(100) NOT NULL
+  `file_sk` varchar(100) NOT NULL,
+  `verif` char(1) NOT NULL,
+  `verif_ket` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `mutasi`
 --
 
-INSERT INTO `mutasi` (`id_mutasi`, `id_personil`, `id_jabatan`, `id_jabatan_lama`, `tanggal`, `file_sk`) VALUES
-(2, 2, 4, 3, '2023-01-21', '35743.pdf');
+INSERT INTO `mutasi` (`id_mutasi`, `id_personil`, `id_jabatan`, `id_jabatan_lama`, `tanggal`, `file_sk`, `verif`, `verif_ket`) VALUES
+(3, 3, 3, 4, '2023-02-15', '78132.pdf', '3', 'SK tidak valid');
 
 -- --------------------------------------------------------
 
@@ -173,8 +178,8 @@ CREATE TABLE `personil` (
 --
 
 INSERT INTO `personil` (`id_personil`, `nm_personil`, `nrp_nip`, `id_pangkat`, `id_jabatan`, `tmpt_lahir`, `tgl_lahir`, `jk`, `agama`, `alamat`, `hp`, `tmt`) VALUES
-(2, 'Budiman', '8989898888', 2, 4, 'Kapuas', '1990-01-15', 'Laki-laki', 'Islam', 'Martapura', '085248176794', '2019-01-19'),
-(3, 'Ade Setiadi', '8989898891', 3, 4, 'Balangan', '1993-01-10', 'Laki-laki', 'Islam', 'Banjarbaru', '087845783412', '2020-01-19');
+(2, 'Budiman', '8989898888', 2, 3, 'Kapuas', '1990-01-15', 'Laki-laki', 'Islam', 'Martapura', '085248176794', '2019-01-19'),
+(3, 'Ade Setiadi', '8989898891', 3, 3, 'Balangan', '1993-01-10', 'Laki-laki', 'Islam', 'Banjarbaru', '087845783412', '2020-01-19');
 
 -- --------------------------------------------------------
 
@@ -197,7 +202,8 @@ CREATE TABLE `tugas` (
 --
 
 INSERT INTO `tugas` (`id_tugas`, `no_surat`, `tgl_surat`, `agenda`, `tgl_mulai`, `tgl_selesai`, `tempat`) VALUES
-('63cb9b5b27fb6', '01/ST/I/2023', '2023-01-21', 'Pelatihan', '2023-01-23', '2023-01-24', 'Test Tempat');
+('63cb9b5b27fb6', '01/ST/I/2023', '2023-01-21', 'Pelatihan', '2023-01-23', '2023-01-24', 'Test Tempat'),
+('63cea8d8359d5', '02/ST/I/2023', '2023-01-23', 'Pelatihan', '2023-01-26', '2023-01-28', 'Test Tempat');
 
 -- --------------------------------------------------------
 
@@ -217,7 +223,9 @@ CREATE TABLE `tugas_detail` (
 
 INSERT INTO `tugas_detail` (`id_tugas_detail`, `id_tugas`, `id_personil`) VALUES
 (1, '63cb9b5b27fb6', 3),
-(2, '63cb9b5b27fb6', 2);
+(2, '63cb9b5b27fb6', 2),
+(3, '63cea8d8359d5', 3),
+(4, '63cea8d8359d5', 2);
 
 -- --------------------------------------------------------
 
@@ -321,7 +329,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `jabatan`
 --
@@ -336,12 +344,12 @@ ALTER TABLE `jenis_kegiatan`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mutasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pangkat`
 --
@@ -356,7 +364,7 @@ ALTER TABLE `personil`
 -- AUTO_INCREMENT for table `tugas_detail`
 --
 ALTER TABLE `tugas_detail`
-  MODIFY `id_tugas_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tugas_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user`
 --

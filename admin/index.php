@@ -5,8 +5,10 @@ $page = 'dashboard';
 include_once '../template/sidebar.php';
 
 $a = $con->query("SELECT COUNT(*) AS total FROM personil")->fetch_array();
-$b = $con->query("SELECT COUNT(*) AS total FROM cuti")->fetch_array();
-$c = $con->query("SELECT COUNT(*) AS total FROM mutasi")->fetch_array();
+$b1 = $con->query("SELECT COUNT(*) AS total FROM cuti")->fetch_array();
+$b2 = $con->query("SELECT COUNT(*) AS total FROM cuti WHERE verif = 1 ")->fetch_array();
+$c1 = $con->query("SELECT COUNT(*) AS total FROM mutasi")->fetch_array();
+$c2 = $con->query("SELECT COUNT(*) AS total FROM mutasi WHERE verif = 1")->fetch_array();
 $d = $con->query("SELECT COUNT(*) AS total FROM tugas")->fetch_array();
 $e = $con->query("SELECT COUNT(*) AS total FROM kegiatan")->fetch_array();
 ?>
@@ -39,7 +41,7 @@ $e = $con->query("SELECT COUNT(*) AS total FROM kegiatan")->fetch_array();
                         <span class="info-box-icon bg-gradient-purple elevation-2"><i class="fas fa-calendar-times"></i></span>
                         <div class="info-box-content">
                             <h6 class="info-box-text mt-2 mb-0">Data Cuti</h6>
-                            <?= $b['total'] ?> Total Data
+                            <span class="badge badge-success"><?= $b1['total'] ?> Total Data</span> | <span class="badge badge-warning"><?= $b2['total'] ?> Data Belum Verifikasi</span>
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,7 @@ $e = $con->query("SELECT COUNT(*) AS total FROM kegiatan")->fetch_array();
                         <span class="info-box-icon bg-gradient-primary elevation-2"><i class="fas fa-id-card-alt"></i></span>
                         <div class="info-box-content">
                             <h6 class="info-box-text mt-2 mb-0">Data Mutasi Jabatan</h6>
-                            <?= $c['total'] ?> Total Data
+                            <span class="badge badge-success"><?= $c1['total'] ?> Total Data</span> | <span class="badge badge-warning"><?= $c2['total'] ?> Data Belum Verifikasi</span>
                         </div>
                     </div>
                 </div>

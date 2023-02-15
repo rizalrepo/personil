@@ -214,7 +214,9 @@ if (isset($_POST['submit'])) {
         '$id_personil', 
         '$ket',
         '$tgl_mulai',
-        '$tgl_selesai'
+        '$tgl_selesai',
+        1,
+        default
     )");
 
     if ($tambah) {
